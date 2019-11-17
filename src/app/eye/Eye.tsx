@@ -10,8 +10,6 @@ import { IrisPositionCalculator } from "./IrisPositionCalculator";
 
 export default class Eye extends React.Component<EyeProperties, IrisState> {
 
-    private intervalId: any;
-
     constructor(props: EyeProperties) {
         super(props);
     
@@ -20,26 +18,30 @@ export default class Eye extends React.Component<EyeProperties, IrisState> {
           irisTransform: {
               transform: ''
           },
-          lidOpenClosed: '0'
+          lidOpenClosed: '0',
+          intervalTimer: null
         };
+        
         this.handleCloseLidClick = this.handleCloseLidClick.bind(this);
+
       }
 
     componentDidMount(): void {
-        this.setState({ irisNodeReference: ReactDOM.findDOMNode(this) as Element });
-
-        this.intervalId = setInterval( () => {
-            if (this.state.lidOpenClosed === '1') {
-                return;
-            } else {
-                this.setState({ lidOpenClosed: '1'})
-            }
-            setTimeout(() => this.setState({ lidOpenClosed: '0'}), 300)
-        }, 7 * 1000);
+        this.setState({ 
+            irisNodeReference: ReactDOM.findDOMNode(this) as Element,
+            intervalTimer: setInterval(() => {
+                if (this.state.lidOpenClosed === '1') {
+                    return;
+                } else {
+                    this.setState({ lidOpenClosed: '1'})
+                }
+                setTimeout(() => this.setState({ lidOpenClosed: '0'}), this.props.keepLidClosed)
+            }, this.props.blinkSpeedFactor * this.props.blinkSpeed)
+        });
     }
 
     componentWillUnmount() {
-        clearInterval(this.intervalId);
+        clearInterval(this.state.intervalTimer);
     }
 
     handleCloseLidClick(event: React.MouseEvent) {
@@ -63,7 +65,7 @@ export default class Eye extends React.Component<EyeProperties, IrisState> {
         const irisTransform = this.getIrisTransformStyle();
 
         return (
-            <svg id={this.props.eyeId} viewBox="0 0 120 120" onClick={this.handleCloseLidClick}>
+            <svg style={this.props.eyeStyle} id={this.props.eyeId} viewBox="0 0 120 120" onClick={this.handleCloseLidClick}>
                 <Iris irisId={this.props.eyeId} irisStyle={irisTransform}></Iris>
                 <OpenLid openLidId={this.props.eyeId}></OpenLid>
                 <CloseLid closeLidId={this.props.eyeId} openClosed={this.state.lidOpenClosed}></CloseLid>
