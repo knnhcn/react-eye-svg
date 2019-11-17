@@ -7,7 +7,14 @@ export type EyeProperties = {
     eyeStyle: CSSProperties;
     keepLidClosed: number,
     blinkSpeed: number,
-    blinkSpeedFactor: number
+    blinkSpeedFactor: number,
+    irisGradient: {
+        gradientId: string;
+        firstIrisColor: string;
+        secondIrisColor: string;
+        thirdIrisColor: string;
+        fourthIrisColor: string;
+    }
 }
 
 export type IrisState = {

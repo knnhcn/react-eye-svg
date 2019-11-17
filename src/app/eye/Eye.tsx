@@ -21,9 +21,6 @@ export default class Eye extends React.Component<EyeProperties, IrisState> {
           lidOpenClosed: '0',
           intervalTimer: null
         };
-        
-        this.handleCloseLidClick = this.handleCloseLidClick.bind(this);
-
       }
 
     componentDidMount(): void {
@@ -65,8 +62,11 @@ export default class Eye extends React.Component<EyeProperties, IrisState> {
         const irisTransform = this.getIrisTransformStyle();
 
         return (
-            <svg style={this.props.eyeStyle} id={this.props.eyeId} viewBox="0 0 120 120" onClick={this.handleCloseLidClick}>
-                <Iris irisId={this.props.eyeId} irisStyle={irisTransform}></Iris>
+            <svg style={this.props.eyeStyle} id={this.props.eyeId} viewBox="0 0 120 120" onClick={this.handleCloseLidClick.bind(this)}>
+                <Iris   irisId={this.props.eyeId}
+                        irisStyle={irisTransform}
+                        irisGradient={this.props.irisGradient}>
+                </Iris>
                 <OpenLid openLidId={this.props.eyeId}></OpenLid>
                 <CloseLid closeLidId={this.props.eyeId} openClosed={this.state.lidOpenClosed}></CloseLid>
             </svg>
