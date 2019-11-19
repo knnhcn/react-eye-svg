@@ -52,6 +52,9 @@ export default class App extends React.Component<any, AppState> {
       fourthIrisColor: "#2f4636"
     }
 
+    const skinColor1 = "#FDDC99";
+    const skinColor2 = "#5E4718"
+
     return (
       <div className="main-container" onMouseMove={this._onMouseMove.bind(this)}>
           <Eye  eyeId={"leftEye"}
@@ -61,7 +64,8 @@ export default class App extends React.Component<any, AppState> {
                 keepLidClosed={300}
                 blinkSpeedFactor={7}
                 blinkSpeed={1000}
-                irisGradient={irisGradient1}>
+                irisGradient={irisGradient1}
+                skinColor={skinColor1}>
           </Eye>
           <Eye  eyeId={"rightEye"}
                 eyeStyle={rightEye}
@@ -70,7 +74,8 @@ export default class App extends React.Component<any, AppState> {
                 keepLidClosed={300}
                 blinkSpeedFactor={7}
                 blinkSpeed={1000}
-                irisGradient={irisGradient2}>
+                irisGradient={irisGradient2}
+                skinColor={skinColor2}>
           </Eye>
       </div>
     );

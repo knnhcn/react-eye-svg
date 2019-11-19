@@ -67,8 +67,8 @@ export default class Eye extends React.Component<EyeProperties, IrisState> {
                         irisStyle={irisTransform}
                         irisGradient={this.props.irisGradient}>
                 </Iris>
-                <OpenLid openLidId={this.props.eyeId}></OpenLid>
-                <CloseLid closeLidId={this.props.eyeId} openClosed={this.state.lidOpenClosed}></CloseLid>
+                <OpenLid openLidId={this.props.eyeId} skinColor={this.props.skinColor}></OpenLid>
+                <CloseLid closeLidId={this.props.eyeId} skinColor={this.props.skinColor} openClosed={this.state.lidOpenClosed}></CloseLid>
             </svg>
         );
     }

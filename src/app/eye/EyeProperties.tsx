@@ -15,6 +15,7 @@ export type EyeProperties = {
         thirdIrisColor: string;
         fourthIrisColor: string;
     }
+    skinColor: string;
 }
 
 export type IrisState = {
